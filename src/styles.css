@@ -1,0 +1,22 @@
+/* You can add global styles to this file, and also import other style files */
+.ngx-pagination {
+
+  outline: none !important;
+  margin-bottom: 0px !important;
+  font-size: 14px;
+  position: relative;
+  float: right;
+  margin: auto;
+}
+
+.ngx-pagination .current,
+.btn-info {
+  background: #0096c7 !important;
+  outline: none !important;
+}
+
+.ngx-pagination .current:hover {
+  background: #444 !important;
+  color: #fff;
+  outline: none !important;
+}

@@ -1,0 +1,79 @@
+<header class="header">
+  <h5>{{title}}</h5>
+  
+</header>
+<div>
+  
+</div>
+
+<main class="main">
+    <div class="container">
+      <input *ngIf="!isDetail" #input (keyup.enter)="onSearch(input.value)" type="text" placeholder="Post ID">
+      <button class="btn" *ngIf="isDetail || isAuthor" (click)="hideDetail()">Retour</button>
+      
+      <div class="grid" *ngIf="!isDetail && !isAuthor">
+        <div class="col-4" *ngFor="let post of posts | paginate: { itemsPerPage: 20, currentPage: p }">
+          <p-card>
+            <div >
+              <div >
+                <span (click)="showDetail(post)" class="titre">{{(post.title | slice:0:25)+'...'}}</span>
+                <br>
+                <span (click)="showAuthor(post.userId)" pTooltip="Voir auteur" class="author">{{post.userId.name}}</span>
+              </div>
+            </div>
+          </p-card>
+        </div>
+        
+    </div>
+    <br>
+    <pagination-controls
+      *ngIf="!isDetail && !isAuthor"
+      previousLabel="Précédent"
+      nextLabel="Suivant"
+     (pageChange)="p = $event">
+    </pagination-controls>
+
+    <!--Détail d'un post-->
+    <div class="detail" *ngIf="isDetail">
+      <h2>{{post.title}}</h2>
+      <h4>{{post.userId.name}}</h4>
+      <p>{{post.body}}</p>
+    </div>
+
+    <!--Détail d'un auteur-->
+    <div class="detail-aut" *ngIf="isAuthor">
+      <p-fieldset [legend]="author.name">
+
+        <div class="grid">
+          <div class="col-6 my-align">
+            <i class="uil uil-user"></i>
+            <span class="my-span">{{author.username}}</span>
+          </div>
+          <div class="col-6 my-align">
+            <i class="uil uil-message"></i>
+            <span class="my-span">{{author.email}}</span>
+          </div>
+          <div class="col-6 my-align">
+            <i class="uil uil-phone"></i>
+            <span class="my-span">{{author.phone}}</span>
+          </div>
+          <div class="col-6 my-align">
+            <i class="uil uil-phone"></i>
+            <span class="my-span">{{author.address.city}}</span>
+          </div>
+
+          
+          
+
+        </div>
+
+      </p-fieldset>
+      
+    </div>
+
+
+      <br>
+      <br>
+    </div>
+
+</main>
